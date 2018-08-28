@@ -1,4 +1,7 @@
+import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
+import JssProvider from 'react-jss/lib/JssProvider';
+import getContext from '../lib/context';
 
 class MyDocument extends Document {
   render() {
@@ -18,12 +21,12 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Muli:300,400:latin"
           />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <link
             rel="stylesheet"
             href="https://storage.googleapis.com/builderbook/nprogress.min.css"
           />
           <link rel="stylesheet" href="https://storage.googleapis.com/builderbook/vs.min.css" />
+
           <style>
             {`
               a, a:focus {
@@ -74,5 +77,32 @@ class MyDocument extends Document {
     );
   }
 }
+
+MyDocument.getInitialProps = ({ renderPage }) => {
+  const pageContext = getContext();
+
+  const page = renderPage(Component => props => (
+    <JssProvider
+      registry={pageContext.sheetsRegistry}
+      generateClassName={pageContext.generateClassName}
+    >
+      <Component pageContext={pageContext} {...props} />
+    </JssProvider>
+  ));
+
+  return {
+    ...page,
+    pageContext,
+    styles: (
+      <style
+        id="jss-server-side"
+        // eslint-disable-next-line
+        dangerouslySetInnerHTML={{
+          __html: pageContext.sheetsRegistry.toString(),
+        }}
+      />
+    ),
+  };
+};
 
 export default MyDocument;
