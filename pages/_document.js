@@ -1,6 +1,6 @@
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
 import JssProvider from 'react-jss/lib/JssProvider';
+import Document, { Head, Main, NextScript } from 'next/document';
 
 import getContext from '../lib/context';
 
@@ -22,7 +22,10 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Muli:300,400:latin"
           />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          />
           <link
             rel="stylesheet"
             href="https://storage.googleapis.com/builderbook/nprogress.min.css"
@@ -51,12 +54,11 @@ class MyDocument extends Document {
                 overflow-x:auto;
                 padding:0.5em;
                 background:#FFF;
+                color: #000;
                 border: 1px solid #ddd;
               }
               code {
                 font-size: 14px;
-                background: #FFF;
-                padding: 3px 5px;
               }
             `}
           </style>

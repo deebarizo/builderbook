@@ -2,6 +2,7 @@ const styleBigAvatar = {
   width: '80px',
   height: '80px',
   margin: '0px auto 15px',
+
 };
 
 const styleRaisedButton = {
